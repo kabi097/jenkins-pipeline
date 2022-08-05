@@ -8,9 +8,10 @@ To learn more about the application please check our Introduction to programming
 https://www.youtube.com/watch?v=sCpVNizJbiE
 
 # Branches:
-By selecting different branches you can get the sample code that you should have in you repository at the end of the selected block:
+By selecting different branches you can get the sample code for different workshops:
 
 |Branches | Description  | 
 |---|---|
 | main | Basic application version |
 | final |  Docker, Jenkins, SonarQube integration and tests |
+| workshop | Update index.html |

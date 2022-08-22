@@ -1,6 +1,6 @@
-def imageName="192.168.44.44:8082/docker_registry/frontend"
-def dockerRegistry="https://192.168.44.44:8082"
-def registryCredentials="artifactory"
+def imageName="${DOCKERHUB}/frontend"
+def dockerRegistry=""
+def registryCredentials="dockerhub"
 def dockerTag=""
 
 pipeline {
@@ -47,7 +47,7 @@ pipeline {
             }
         }
 
-        stage ('Pushing image to Artifactory') {
+        stage ('Pushing image to docker registry') {
             steps {
                 script {
                     docker.withRegistry("$dockerRegistry", "$registryCredentials") {
@@ -62,6 +62,9 @@ pipeline {
         always {
             junit testResults: "test-results/*.xml"
             cleanWs()
+        }
+        success {
+            build job: 'app_of_apps', parameters: [ string(name: 'frontendDockerTag', value: "$dockerTag")], wait: false
         }
     }
 }
